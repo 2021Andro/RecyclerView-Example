@@ -39,6 +39,15 @@ public class MyRV_Adapter extends RecyclerView.Adapter<MyRV_Adapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
+        holder.itemView.setTag( productList.get(position) );
+
+        DemoProduct product = productList.get(position);
+
+        holder.tvId.setText("Id " + product.getId());
+        holder.tvName.setText(product.getName());
+        holder.tvAge.setText("Age " + product.getAge());
+        holder.tvPrice.setText("Price " + product.getPrice());
+
     }
 
     @Override
@@ -55,12 +64,18 @@ public class MyRV_Adapter extends RecyclerView.Adapter<MyRV_Adapter.MyViewHolder
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            tvId = itemView.findViewById(R.id.tvId);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvAge = itemView.findViewById(R.id.tvAge);
+            tvPrice = itemView.findViewById(R.id.tvPrice);
+            productImage = itemView.findViewById(R.id.img);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-
+                    myRVEvent.onItemClick( productList.indexOf( (DemoProduct) itemView.getTag() ) );
 
                 }
             });
